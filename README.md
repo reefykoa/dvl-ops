@@ -8,20 +8,18 @@ Cross-project Claude Code skills for Digital Vortex Labs teams. These skills aut
 
 | Skill | Purpose |
 |-------|---------|
-| [`open-pr`](skills/open-pr/SKILL.md) | Stage, commit, push, create a PR, and request CodeRabbit review |
+| [`open-pr`](skills/open-pr/SKILL.md) | Stage, commit, push, and create a PR |
 | [`push-up-changes`](skills/push-up-changes/SKILL.md) | Stage relevant files, commit, and push the current branch |
 | [`address-review-feedback`](skills/address-review-feedback/SKILL.md) | Apply fixes for PR review comments and post a structured reply |
 | [`post-review-followup`](skills/post-review-followup/SKILL.md) | Summarize how each piece of reviewer feedback was handled |
-| [`address-coderabbit-feedback`](skills/address-coderabbit-feedback/SKILL.md) | Fix unresolved CodeRabbit threads and reply inline |
 | [`validate-pr-against-issue`](skills/validate-pr-against-issue/SKILL.md) | Compare a Linear issue against a PR and report requirement gaps |
 | [`summarize-pr`](skills/summarize-pr/SKILL.md) | Generate dual TLDR summaries (stakeholder + engineering) for a PR |
-| [`security-review-pr`](skills/security-review-pr/SKILL.md) | OWASP Top 10 security audit of a PR diff |
+| [`post-analysis-to-github`](skills/post-analysis-to-github/SKILL.md) | Post the current conversation's analysis as a GitHub PR comment |
 
 ### CI & Testing
 
 | Skill | Purpose |
 |-------|---------|
-| [`fix-ci`](skills/fix-ci/SKILL.md) | Diagnose and fix failing GitHub Actions CI checks |
 | [`fix-unit-tests`](skills/fix-unit-tests/SKILL.md) | Run unit tests, fix all failures, and loop until green |
 
 ### Investigation & Analysis
@@ -29,8 +27,6 @@ Cross-project Claude Code skills for Digital Vortex Labs teams. These skills aut
 | Skill | Purpose |
 |-------|---------|
 | [`investigate-linear-issue`](skills/investigate-linear-issue/SKILL.md) | End-to-end Linear issue investigation — posts 8-section analysis as a comment |
-| [`investigate-slack-threads`](skills/investigate-slack-threads/SKILL.md) | Read Slack threads and synthesize an 8-section issue analysis |
-| [`post-analysis-to-github`](skills/post-analysis-to-github/SKILL.md) | Post the current conversation's analysis as a GitHub PR comment |
 
 ## Adding to a Project
 
@@ -68,5 +64,5 @@ Each project maintains its own skills in `.claude/skills/` for workflows that ar
 ## Contributing
 
 1. Add or update a `skills/<skill-name>/SKILL.md` in this repo.
-2. Open a PR — CodeRabbit will review automatically.
+2. Open a PR for review.
 3. After merge, consuming projects bump their submodule ref via `git submodule update --remote`.

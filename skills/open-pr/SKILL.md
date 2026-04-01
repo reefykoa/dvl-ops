@@ -1,10 +1,10 @@
 ---
 name: open-pr
-description: Stage, commit, push, create a GitHub pull request, and request CodeRabbit review. Use this skill whenever the user says "open a PR", "create a pull request", "make a PR", or wants to submit their current work for review.
+description: Stage, commit, push, and create a GitHub pull request. Use this skill whenever the user says "open a PR", "create a pull request", "make a PR", or wants to submit their current work for review.
 user_invocable: true
 ---
 
-Stage, commit, push, create a GitHub pull request, and request CodeRabbit review.
+Stage, commit, push, and create a GitHub pull request.
 
 ## Steps
 
@@ -29,12 +29,7 @@ Stage, commit, push, create a GitHub pull request, and request CodeRabbit review
    - Body should include a summary (1–3 bullet points) and a test plan checklist.
    - Base the PR against the default branch detected in step 2.
 
-6. **Request CodeRabbit review.** Post a comment on the newly created PR:
-   ```
-   gh pr comment <PR_NUMBER> --body "@coderabbitai review"
-   ```
-
-7. **Report back.** Share the PR URL with the user and confirm CodeRabbit was tagged.
+6. **Report back.** Share the PR URL with the user.
 
 ## Notes
 - Never commit files that likely contain secrets (`.env`, `credentials.json`, `*.pem`, etc.). Warn the user if they specifically request committing those files.
