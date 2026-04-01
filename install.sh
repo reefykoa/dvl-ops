@@ -23,6 +23,12 @@ for skill_dir in "$SCRIPT_DIR/skills"/*/; do
   dest="$TARGET_DIR/$skill_name"
 
   if [ -d "$dest" ]; then
+    # Skip if the destination SKILL.md differs from the plugin source —
+    # this means the project has a custom override for this skill.
+    if [ -f "$dest/SKILL.md" ] && ! diff -q "$skill_dir/SKILL.md" "$dest/SKILL.md" > /dev/null 2>&1; then
+      echo "  Skipping  $skill_name (project override present)"
+      continue
+    fi
     echo "  Updating  $skill_name"
   else
     echo "  Installing $skill_name"
