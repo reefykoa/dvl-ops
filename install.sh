@@ -6,6 +6,10 @@
 #
 # Or after a submodule update:
 #   git submodule update --remote .claude/dvl-ops && bash .claude/dvl-ops/install.sh
+#
+# Project overrides: if a skill's SKILL.md was NOT installed by dvl-ops (no .dvl-ops marker
+# file alongside it), install.sh will skip it rather than clobber it. This lets projects
+# maintain customised versions of any skill without losing them on updates.
 
 set -euo pipefail
 
@@ -16,17 +20,30 @@ if [ ! -d "$TARGET_DIR" ]; then
   mkdir -p "$TARGET_DIR"
 fi
 
+# Also copy shared support files (_shared/) so skills that reference them can read them.
+SHARED_SRC="$SCRIPT_DIR/skills/_shared"
+SHARED_DEST="$TARGET_DIR/_shared"
+if [ -d "$SHARED_SRC" ]; then
+  mkdir -p "$SHARED_DEST"
+  cp -r "$SHARED_SRC"/. "$SHARED_DEST/"
+fi
+
 echo "Installing dvl-ops skills into $TARGET_DIR ..."
+
+skill_count=0
 
 for skill_dir in "$SCRIPT_DIR/skills"/*/; do
   skill_name="$(basename "$skill_dir")"
+
+  # Skip support directories (prefixed with _)
+  [[ "$skill_name" == _* ]] && continue
+
   dest="$TARGET_DIR/$skill_name"
 
   if [ -d "$dest" ]; then
-    # Skip if the destination SKILL.md differs from the plugin source —
-    # this means the project has a custom override for this skill.
-    if [ -f "$dest/SKILL.md" ] && ! diff -q "$skill_dir/SKILL.md" "$dest/SKILL.md" > /dev/null 2>&1; then
-      echo "  Skipping  $skill_name (project override present)"
+    if [ ! -f "$dest/.dvl-ops" ]; then
+      # No marker — this skill was not installed by dvl-ops; it is a project override.
+      echo "  Skipping  $skill_name (project override — no .dvl-ops marker)"
       continue
     fi
     echo "  Updating  $skill_name"
@@ -36,9 +53,13 @@ for skill_dir in "$SCRIPT_DIR/skills"/*/; do
   fi
 
   cp "$skill_dir/SKILL.md" "$dest/SKILL.md"
+  # Write marker so future runs know this skill is dvl-ops managed.
+  touch "$dest/.dvl-ops"
+
+  skill_count=$((skill_count + 1))
 done
 
-echo "Done. $(ls "$SCRIPT_DIR/skills" | wc -l | tr -d ' ') skills installed."
+echo "Done. $skill_count skills installed/updated."
 echo ""
 echo "Next steps:"
 echo "  git add .claude/skills"
