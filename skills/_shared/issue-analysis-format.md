@@ -1,6 +1,6 @@
 # Issue Analysis Format
 
-Shared synthesis questions, output template, and analysis rules used by `investigate-linear-issue` and `investigate-slack-threads`.
+Shared synthesis questions, output template, and analysis rules used by `investigate-linear-issue`.
 
 ---
 
