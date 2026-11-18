@@ -1,0 +1,11 @@
+{
+  "name": "dvl",
+  "owner": { "name": "Digital Vortex Labs" },
+  "plugins": [
+    {
+      "name": "dvl-ops",
+      "source": "./",
+      "description": "Cross-project developer-operations skills for Digital Vortex Labs projects."
+    }
+  ]
+}

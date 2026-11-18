@@ -1,0 +1,8 @@
+{
+  "name": "dvl-ops",
+  "version": "1.0.0",
+  "description": "Cross-project Claude Code skills for Digital Vortex Labs: PR creation, review response, push flows, test plans, issue validation and investigation.",
+  "author": { "name": "Digital Vortex Labs" },
+  "repository": "https://github.com/reefykoa/dvl-ops",
+  "license": "UNLICENSED"
+}

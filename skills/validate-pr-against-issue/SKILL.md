@@ -51,7 +51,7 @@ Compare a Linear issue's requirements against a GitHub PR and produce a gap repo
    [Any ambiguities, out-of-scope items, or suggestions]
    ```
 
-7. **Post the report to Linear.** Post the gap report as a comment on the Linear issue using the Linear MCP tool or `./scripts/linear-workflow/post_linear_comment.sh` if available in the current project.
+7. **Post the report to Linear.** Post the gap report as a comment on the Linear issue using the Linear MCP `save_comment` tool.
 
 ## Notes
 - This skill is for scope and acceptance validation, not code style review.

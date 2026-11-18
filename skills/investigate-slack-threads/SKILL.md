@@ -40,7 +40,7 @@ If repos to search were specified by the user, search them for the relevant code
 
 ## Step 5: Synthesize and output
 
-Read `.claude/skills/_shared/issue-analysis-format.md` for the synthesis questions, output format, and analysis rules.
+Read `_shared/issue-analysis-format.md` in the skills folder that holds this skill (as a plugin: `${CLAUDE_PLUGIN_ROOT}/skills/_shared/issue-analysis-format.md`; installed into a project: `.claude/skills/_shared/issue-analysis-format.md`) for the synthesis questions, output format, and analysis rules.
 
 Work through all eight synthesis questions using the evidence gathered, then produce the structured analysis in the console. Use `## Slack Thread Investigation` as the heading.
 

@@ -23,7 +23,7 @@ Cross-project Claude Code skills for Digital Vortex Labs teams. These skills aut
 | Skill | Purpose |
 |-------|---------|
 | [`fix-unit-tests`](skills/fix-unit-tests/SKILL.md) | Run unit tests, fix all failures, and loop until green |
-| [`run-test-plan`](skills/run-test-plan/SKILL.md) | Execute a test plan checklist from a Linear issue comment and post results |
+| [`run-test-plan`](skills/run-test-plan/SKILL.md) | Execute a test plan checklist from a PR body (ticks items in place) or a Linear issue comment, and record results |
 
 ### Investigation & Analysis
 
@@ -47,7 +47,33 @@ Cross-project Claude Code skills for Digital Vortex Labs teams. These skills aut
 
 ## Adding to a Project
 
-### Option A: Git Submodule (recommended — auto-updates with `git submodule update`)
+dvl-ops is a Claude Code plugin, distributed from the `dvl` marketplace in this repo. Its skills are namespaced, for example `/dvl-ops:open-pr`.
+
+### Option A: Enable it for everyone on a project (recommended)
+
+Commit this to the project's `.claude/settings.json`. Anyone who opens the project in Claude Code is prompted to trust the marketplace and install the plugin:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "dvl": { "source": { "source": "github", "repo": "reefykoa/dvl-ops" } }
+  },
+  "enabledPlugins": { "dvl-ops@dvl": true }
+}
+```
+
+### Option B: Install it for yourself
+
+```
+/plugin marketplace add reefykoa/dvl-ops
+/plugin install dvl-ops@dvl
+```
+
+Or in one step on recent Claude Code versions: `/plugin install dvl-ops --marketplace reefykoa/dvl-ops`.
+
+To get updates, run `/plugin marketplace update dvl`.
+
+### Legacy: Git Submodule
 
 ```bash
 # From the root of your project:
@@ -70,7 +96,7 @@ git add .claude/dvl-ops .claude/skills
 git commit -m "update dvl-ops skills"
 ```
 
-### Option B: Manual copy
+### Legacy: Manual copy
 
 Copy individual `skills/<skill-name>/SKILL.md` files into your project's `.claude/skills/` directory.
 
@@ -82,4 +108,4 @@ Each project maintains its own skills in `.claude/skills/` for workflows that ar
 
 1. Add or update a `skills/<skill-name>/SKILL.md` in this repo.
 2. Open a PR for review.
-3. After merge, consuming projects bump their submodule ref via `git submodule update --remote`.
+3. After merge, bump `version` in `.claude-plugin/plugin.json`. Plugin users get the change with `/plugin marketplace update dvl`; submodule users bump their ref via `git submodule update --remote`.
