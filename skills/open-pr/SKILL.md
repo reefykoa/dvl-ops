@@ -29,12 +29,12 @@ Stage, commit, push, and create a GitHub pull request.
    - Body should include a summary (1–3 bullet points) and a test plan checklist.
    - Base the PR against the default branch detected in step 2.
 
-6. **Trigger code review.** After the PR URL is obtained:
+6. **Trigger code review.** Skip this step entirely if `$ARGUMENTS` contains `--no-linear-review` (for projects that already run `/code-review` before opening the PR). Otherwise, after the PR URL is obtained:
    - Extract the Linear issue ID from the branch name: run `git rev-parse --abbrev-ref HEAD`, take the path segment after the first `/`, match the leading `[a-z]+-[0-9]+` token, and uppercase it (e.g. `reefykoa/sw-110-foo` → `SW-110`).
-   - If a Linear issue ID is found, post a comment to it using the `mcp__claude_ai_Linear__save_comment` tool with `body: "@claude review"`.
+   - If a Linear issue ID is found, post a comment to it using the Linear MCP `save_comment` tool (named `mcp__linear__save_comment` or `mcp__claude_ai_Linear__save_comment` depending on how Linear is connected) with `body: "@claude review"`.
    - If no issue ID can be parsed from the branch name, skip this step silently.
 
-7. **Report back.** Share the PR URL with the user. Note whether a `@claude review` comment was posted to Linear.
+7. **Report back.** Share the PR URL with the user. Note whether a `@claude review` comment was posted to Linear, or that it was skipped by `--no-linear-review`.
 
 ## Notes
 - Never commit files that likely contain secrets (`.env`, `credentials.json`, `*.pem`, etc.). Warn the user if they specifically request committing those files.

@@ -44,6 +44,6 @@ As you read, look for and note:
 
 ## Step 4: Synthesize and post
 
-Read `.claude/skills/_shared/issue-analysis-format.md` for the synthesis questions, output format, and analysis rules.
+Read `_shared/issue-analysis-format.md` in the skills folder that holds this skill (as a plugin: `${CLAUDE_PLUGIN_ROOT}/skills/_shared/issue-analysis-format.md`; installed into a project: `.claude/skills/_shared/issue-analysis-format.md`) for the synthesis questions, output format, and analysis rules.
 
 Work through all eight synthesis questions using the evidence gathered above, then use the Linear MCP `save_comment` tool to post the result on the issue. Use `## Issue Analysis` as the comment heading.
